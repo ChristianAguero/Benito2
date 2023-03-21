@@ -4,7 +4,6 @@
  */
 package mx.itson.benito.entidades;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -16,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
  * @author Christian
  */
 @Entity
+@Table (name = "orden_de_compra")
 public class OrdenCompra {
 
     /**

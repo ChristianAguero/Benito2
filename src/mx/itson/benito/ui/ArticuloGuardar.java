@@ -9,12 +9,12 @@ package mx.itson.benito.ui;
  *
  * @author lahg2
  */
-public class ArticuloForm extends javax.swing.JFrame {
+public class ArticuloGuardar extends javax.swing.JFrame {
 
     /**
      * Creates new form ArticuloForm
      */
-    public ArticuloForm() {
+    publArticuloGuardarorm() {
         initComponents();
     }
 
@@ -60,19 +60,20 @@ public class ArticuloForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLArticuloGuardarloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.gArticuloGuardariculoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.LoggeArticuloGuardarArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.LoArticuloGuardarer(ArticuloForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+               //</editor-fold>
+ //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+         ArticuloGuardarid run() {
                 new ArticuloForm().setVisible(true);
             }
         });
