@@ -4,6 +4,7 @@
  */
 package mx.itson.benito.entidades;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
  *
  * @author Christian
  */
+@Entity
 public class Proveedor {
 
     /**

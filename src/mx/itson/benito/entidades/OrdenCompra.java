@@ -4,13 +4,17 @@
  */
 package mx.itson.benito.entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +23,22 @@ import javax.persistence.TemporalType;
  *
  * @author Christian
  */
+@Entity
 public class OrdenCompra {
+
+    /**
+     * @return the ordenes
+     */
+    public List<Articulo> getOrdenes() {
+        return ordenes;
+    }
+
+    /**
+     * @param ordenes the ordenes to set
+     */
+    public void setOrdenes(List<Articulo> ordenes) {
+        this.ordenes = ordenes;
+    }
 
     /**
      * @return the id
@@ -161,20 +180,6 @@ public class OrdenCompra {
         this.proveedor = proveedor;
     }
 
-    /**
-     * @return the articulo
-     */
-    public Articulo getArticulo() {
-        return articulo;
-    }
-
-    /**
-     * @param articulo the articulo to set
-     */
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
-    }
-    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
@@ -190,8 +195,14 @@ public class OrdenCompra {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idProveedor")
     private Proveedor proveedor;
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idArticulo")
-    private Articulo articulo;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "articulo_orden",
+            joinColumns = @JoinColumn(name = "idArticulo"),
+            inverseJoinColumns = @JoinColumn(name = "idOrden")
+    )
+    private List<Articulo> ordenes;
     
 }

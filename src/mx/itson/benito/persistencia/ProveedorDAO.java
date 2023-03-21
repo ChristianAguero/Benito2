@@ -97,7 +97,7 @@ public class ProveedorDAO {
         
     }
     
-    public boolean editar(int id, String nombre, String numeroLicencia, Date fechaAlta){
+    public boolean editar(int id, String nombre, String clave, String telefono, String contacto){
         
         boolean resultado = false;
         
@@ -106,15 +106,16 @@ public class ProveedorDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Conductor conductor = obtenerPorId(id);
+            Proveedor proveedor= obtenerPorId(id);
             
-            if(conductor != null){
+            if(proveedor != null){
                 
-                conductor.setNombre(nombre);
-                conductor.setFechaAlta(fechaAlta);
-                conductor.setNumeroLicencia(numeroLicencia);
+                proveedor.setNombre(nombre);
+                proveedor.setClave(clave);
+                proveedor.setTelefono(telefono);
+                proveedor.setContacto(contacto);
                 
-                session.saveOrUpdate(conductor);
+                session.saveOrUpdate(proveedor);
                 session.getTransaction().commit();
                 
                 resultado = true;
@@ -145,11 +146,11 @@ public class ProveedorDAO {
                Session session = HibernateUtil.getSessionFactory().openSession();
                session.beginTransaction();
 
-               Conductor conductor = obtenerPorId(id);
+               Proveedor proveedor = obtenerPorId(id);
 
-               if(conductor != null){
+               if(proveedor != null){
 
-                   session.delete(conductor);
+                   session.delete(proveedor);
                    session.getTransaction().commit();
 
                    resultado = true;

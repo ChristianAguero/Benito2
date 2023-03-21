@@ -4,18 +4,36 @@
  */
 package mx.itson.benito.entidades;
 
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
  *
  * @author Christian
  */
+@Entity
 public class Articulo {
+
+    /**
+     * @return the articulos
+     */
+    public List<Articulo> getArticulos() {
+        return articulos;
+    }
+
+    /**
+     * @param articulos the articulos to set
+     */
+    public void setArticulos(List<Articulo> articulos) {
+        this.articulos = articulos;
+    }
 
     /**
      * @return the id
@@ -96,5 +114,7 @@ public class Articulo {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idProveedor")
     private Proveedor proveedor;
+    @ManyToMany(mappedBy = "ordenes")
+    private List<Articulo> articulos;
     
 }
