@@ -78,14 +78,14 @@ public class OrdenCompraDAO {
         
     }
     
-    public Proveedor obtenerPorId(int id){
+    public OrdenCompra obtenerPorId(int id){
         
-        Proveedor proveedor = new Proveedor();
+        OrdenCompra orden = new OrdenCompra();
         
         try{
             
             Session session = HibernateUtil.getSessionFactory().openSession();
-            proveedor = session.get(Proveedor.class,  id);
+            orden = session.get(OrdenCompra.class,  id);
             
         }catch(HibernateException ex){
             
@@ -93,11 +93,11 @@ public class OrdenCompraDAO {
             
         }
         
-        return proveedor;
+        return orden;
         
     }
     
-    public boolean editar(int id, String nombre, String clave, String telefono, String contacto){
+    /*public boolean editar(int id, String nombre, String clave, String telefono, String contacto){
         
         boolean resultado = false;
         
@@ -106,7 +106,7 @@ public class OrdenCompraDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Proveedor proveedor= obtenerPorId(id);
+            OrdenCompra orden = obtenerPorId(id);
             
             if(proveedor != null){
                 
@@ -167,6 +167,6 @@ public class OrdenCompraDAO {
          
          return resultado;
         
-    }
+    }*/
     
 }

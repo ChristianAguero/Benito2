@@ -28,6 +28,20 @@ import javax.persistence.TemporalType;
 public class OrdenCompra {
 
     /**
+     * @return the articulos
+     */
+    public List<Articulo> getArticulos() {
+        return articulos;
+    }
+
+    /**
+     * @param articulos the articulos to set
+     */
+    public void setArticulos(List<Articulo> articulos) {
+        this.articulos = articulos;
+    }
+
+    /**
      * @return the id
      */
     public int getId() {

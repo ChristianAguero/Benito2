@@ -99,14 +99,15 @@ public class Main extends javax.swing.JFrame {
 
     private void btnArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticulosActionPerformed
         
-        ArticuloMain a = new ArticuloMain();
+        ArticulosMain a = new ArticulosMain();
         a.setVisible(true);
         
     }//GEN-LAST:event_btnArticulosActionPerformed
 
     private void btnOrdenesCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenesCompraActionPerformed
         
-        
+        OrdenesMain o = new OrdenesMain();
+        o.setVisible(true);
         
     }//GEN-LAST:event_btnOrdenesCompraActionPerformed
 
