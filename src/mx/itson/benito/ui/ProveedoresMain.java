@@ -1,29 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package mx.itson.benito.ui;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.benito.entidades.*;
-import mx.itson.benito.persistencia.*;
+import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.entidades.Proveedor;
+import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
  *
- * @author lahg2
+ * @author shiri
  */
-public class ArticuloMain extends javax.swing.JFrame {
+public class ProveedoresMain extends javax.swing.JFrame {
 
     /**
-     * Creates new form ArticuloMain
+     * Creates new form ProveedoresMain
      */
-    public ArticuloMain() {
+    public ProveedoresMain() {
         initComponents();
         
-        tblArticulos.removeColumn(tblArticulos.getColumnModel().getColumn(0));
-        
+        tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
     }
 
     /**
@@ -36,12 +35,12 @@ public class ArticuloMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblArticulos = new javax.swing.JTable();
+        tblProveedores = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnEliminar = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         btnAgregar = new javax.swing.JMenuItem();
         btnEditar = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        btnEliminar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -50,20 +49,20 @@ public class ArticuloMain extends javax.swing.JFrame {
             }
         });
 
-        tblArticulos.setModel(new javax.swing.table.DefaultTableModel(
+        tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Proveedor"
+                "ID", "Nombre", "Clave", "telefono", "Contacto"
             }
         ));
-        jScrollPane1.setViewportView(tblArticulos);
+        jScrollPane1.setViewportView(tblProveedores);
 
-        btnEliminar.setText("Opciones");
+        jMenu1.setText("Opciones");
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +70,7 @@ public class ArticuloMain extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        btnEliminar.add(btnAgregar);
+        jMenu1.add(btnAgregar);
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,17 +78,17 @@ public class ArticuloMain extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        btnEliminar.add(btnEditar);
+        jMenu1.add(btnEditar);
 
-        jMenuItem1.setText("Eliminar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        btnEliminar.add(jMenuItem1);
+        jMenu1.add(btnEliminar);
 
-        jMenuBar1.add(btnEliminar);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -99,7 +98,7 @@ public class ArticuloMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1638, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1641, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,28 +112,23 @@ public class ArticuloMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        cargarTabla();
-        
-    }//GEN-LAST:event_formWindowOpened
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        GuardarArticulo formulario = new GuardarArticulo(this, true, 0);
+        GuardarProveedor formulario = new GuardarProveedor(this, true, 0);
         formulario.setVisible(true);
 
         cargarTabla();
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         try{
 
-            int renglon = tblArticulos.getSelectedRow();
-            int id = Integer.parseInt( tblArticulos.getModel().getValueAt(renglon, 0).toString());
+            int renglon = tblProveedores.getSelectedRow();
+            int id = Integer.parseInt( tblProveedores.getModel().getValueAt(renglon, 0).toString());
 
-            new GuardarArticulo(this, true, id).setVisible(true);
+            new GuardarProveedor(this, true, id).setVisible(true);
 
             cargarTabla();
 
@@ -143,16 +137,17 @@ public class ArticuloMain extends javax.swing.JFrame {
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
         }
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
         try{
 
-            int renglon = tblArticulos.getSelectedRow();
-            int id = Integer.parseInt( tblArticulos.getModel().getValueAt(renglon, 0).toString());
+            int renglon = tblProveedores.getSelectedRow();
+            int id = Integer.parseInt( tblProveedores.getModel().getValueAt(renglon, 0).toString());
 
-            new ArticuloDAO().eliminar(id);
+            new ProveedorDAO().eliminar(id);
 
             cargarTabla();
 
@@ -161,7 +156,14 @@ public class ArticuloMain extends javax.swing.JFrame {
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+       cargarTabla();
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * Sirve para imprimir la tabla de la base de datos a la tabla que vera el usuiario
@@ -170,15 +172,15 @@ public class ArticuloMain extends javax.swing.JFrame {
         
         try{
             
-            DefaultTableModel modelo = (DefaultTableModel) tblArticulos.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) tblProveedores.getModel();
             modelo.setRowCount(0);
-            ArticuloDAO ar = new ArticuloDAO();
+            ProveedorDAO pr = new ProveedorDAO();
 
-            List<Articulo> articulos = ar.ObtenerTodos();
+            List<Proveedor> proveedores = pr.ObtenerTodos();
             
-            for(Articulo a : articulos){
+            for(Proveedor p : proveedores){
 
-                modelo.addRow(new Object[] {a.getId(), a.getNombre(), String.format("$%1.2f", a.getPrecio()), a.getProveedor().getNombre()});
+                modelo.addRow(new Object[] {p.getId(), p.getNombre(), p.getClave(), p.getTelefono(), p.getContacto()});
 
             }
             
@@ -206,20 +208,20 @@ public class ArticuloMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArticuloMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArticuloMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArticuloMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArticuloMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArticuloMain().setVisible(true);
+                new ProveedoresMain().setVisible(true);
             }
         });
     }
@@ -227,10 +229,10 @@ public class ArticuloMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAgregar;
     private javax.swing.JMenuItem btnEditar;
-    private javax.swing.JMenu btnEliminar;
+    private javax.swing.JMenuItem btnEliminar;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblArticulos;
+    private javax.swing.JTable tblProveedores;
     // End of variables declaration//GEN-END:variables
 }

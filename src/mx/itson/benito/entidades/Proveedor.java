@@ -88,6 +88,13 @@ public class Proveedor {
         this.contacto = contacto;
     }
     
+    @Override
+    public String toString(){
+        
+        return this.nombre;
+        
+    }
+    
      @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;

@@ -92,7 +92,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         
-        
+        ProveedoresMain p = new ProveedoresMain();
+        p.setVisible(true);
         
     }//GEN-LAST:event_btnProveedoresActionPerformed
 

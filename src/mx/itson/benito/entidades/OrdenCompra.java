@@ -28,20 +28,6 @@ import javax.persistence.TemporalType;
 public class OrdenCompra {
 
     /**
-     * @return the ordenes
-     */
-    public List<Articulo> getOrdenes() {
-        return ordenes;
-    }
-
-    /**
-     * @param ordenes the ordenes to set
-     */
-    public void setOrdenes(List<Articulo> ordenes) {
-        this.ordenes = ordenes;
-    }
-
-    /**
      * @return the id
      */
     public int getId() {
@@ -196,14 +182,13 @@ public class OrdenCompra {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idProveedor")
     private Proveedor proveedor;
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "articulo_orden",
-            joinColumns = @JoinColumn(name = "idArticulo"),
-            inverseJoinColumns = @JoinColumn(name = "idOrden")
+    @ManyToMany(cascade = CascadeType.MERGE )
+    @JoinTable(
+        name= "articulo_orden",
+        joinColumns = {@JoinColumn(name= "idOrden")},
+        inverseJoinColumns = {@JoinColumn(name="idArticulo")}
+    
     )
-    private List<Articulo> ordenes;
+    private List<Articulo> articulos;
     
 }

@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,20 +21,6 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "articulo")
 public class Articulo {
-
-    /**
-     * @return the articulos
-     */
-    public List<Articulo> getArticulos() {
-        return articulos;
-    }
-
-    /**
-     * @param articulos the articulos to set
-     */
-    public void setArticulos(List<Articulo> articulos) {
-        this.articulos = articulos;
-    }
 
     /**
      * @return the id
@@ -93,15 +78,20 @@ public class Articulo {
         this.proveedor = proveedor;
     }
     
+    @Override
+    public String toString(){
+        
+        return this.nombre;
+        
+    }
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private float precio;
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idProveedor")
+    @JoinColumn(name = "proveedor")
     private Proveedor proveedor;
-    @ManyToMany(mappedBy = "ordenes")
-    private List<Articulo> articulos;
     
 }
