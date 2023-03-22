@@ -37,11 +37,11 @@
             
         </property>
         
-        <mapping class = "mx.itson.benito.entities.Articulo"/>
+        <mapping class = "mx.itson.benito.entidades.Proveedor"/>
         
-        <mapping class = "mx.itson.benito.entities.OrdenCompra"/>
+        <mapping class = "mx.itson.benito.entidades.Articulo"/>
         
-        <mapping class = "mx.itson.benito.entities.Proveedor"/>
+        <mapping class = "mx.itson.benito.entidades.OrdenCompra"/>
         
     </session-factory>
 

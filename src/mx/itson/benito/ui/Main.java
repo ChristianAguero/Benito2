@@ -31,9 +31,9 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnConductores = new javax.swing.JButton();
-        btnOficiales = new javax.swing.JButton();
-        btnMultas = new javax.swing.JButton();
+        btnProveedores = new javax.swing.JButton();
+        btnArticulos = new javax.swing.JButton();
+        btnOrdenesCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -42,24 +42,24 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnConductores.setText("Conductores");
-        btnConductores.addActionListener(new java.awt.event.ActionListener() {
+        btnProveedores.setText("Proveedores");
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConductoresActionPerformed(evt);
+                btnProveedoresActionPerformed(evt);
             }
         });
 
-        btnOficiales.setText("Oficiales");
-        btnOficiales.addActionListener(new java.awt.event.ActionListener() {
+        btnArticulos.setText("Articulos");
+        btnArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOficialesActionPerformed(evt);
+                btnArticulosActionPerformed(evt);
             }
         });
 
-        btnMultas.setText("Multas");
-        btnMultas.addActionListener(new java.awt.event.ActionListener() {
+        btnOrdenesCompra.setText("Ordenes de compra");
+        btnOrdenesCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMultasActionPerformed(evt);
+                btnOrdenesCompraActionPerformed(evt);
             }
         });
 
@@ -70,46 +70,44 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConductores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOficiales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                    .addComponent(btnMultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
+                    .addComponent(btnProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnArticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                    .addComponent(btnOrdenesCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnConductores, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnOficiales, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOrdenesCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConductoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConductoresActionPerformed
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         
-        MainConductor c = new MainConductor();
-        c.setVisible(true);
         
-    }//GEN-LAST:event_btnConductoresActionPerformed
+        
+    }//GEN-LAST:event_btnProveedoresActionPerformed
 
-    private void btnOficialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOficialesActionPerformed
+    private void btnArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticulosActionPerformed
         
-        MainOficial o = new MainOficial();
-        o.setVisible(true);
+        ArticuloMain a = new ArticuloMain();
+        a.setVisible(true);
         
-    }//GEN-LAST:event_btnOficialesActionPerformed
+    }//GEN-LAST:event_btnArticulosActionPerformed
 
-    private void btnMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultasActionPerformed
+    private void btnOrdenesCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenesCompraActionPerformed
         
-        MainMulta m = new MainMulta();
-        m.setVisible(true);
         
-    }//GEN-LAST:event_btnMultasActionPerformed
+        
+    }//GEN-LAST:event_btnOrdenesCompraActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
@@ -166,8 +164,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConductores;
-    private javax.swing.JButton btnMultas;
-    private javax.swing.JButton btnOficiales;
+    private javax.swing.JButton btnArticulos;
+    private javax.swing.JButton btnOrdenesCompra;
+    private javax.swing.JButton btnProveedores;
     // End of variables declaration//GEN-END:variables
 }

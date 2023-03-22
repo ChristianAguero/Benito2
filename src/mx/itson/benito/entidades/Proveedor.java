@@ -8,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Christian
  */
 @Entity
+@Table (name = "proveedor")
 public class Proveedor {
 
     /**
@@ -59,20 +61,6 @@ public class Proveedor {
     }
 
     /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
      * @return the telefono
      */
     public String getTelefono() {
@@ -105,7 +93,6 @@ public class Proveedor {
     private int id;
     private String nombre;
     private String clave;
-    private String email;
     private String telefono;
     private String contacto;
     

@@ -13,12 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Christian
  */
 @Entity
+@Table (name = "articulo")
 public class Articulo {
 
     /**
@@ -47,20 +49,6 @@ public class Articulo {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return the calculo
-     */
-    public String getCalculo() {
-        return calculo;
-    }
-
-    /**
-     * @param calculo the calculo to set
-     */
-    public void setCalculo(String calculo) {
-        this.calculo = calculo;
     }
 
     /**
@@ -108,7 +96,6 @@ public class Articulo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
-    private String calculo;
     private String nombre;
     private float precio;
     @OneToOne(cascade = CascadeType.MERGE)

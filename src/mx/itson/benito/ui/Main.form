@@ -29,9 +29,9 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnConductores" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnOficiales" alignment="1" pref="377" max="32767" attributes="0"/>
-                  <Component id="btnMultas" alignment="1" pref="377" max="32767" attributes="0"/>
+                  <Component id="btnProveedores" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnArticulos" alignment="1" pref="377" max="32767" attributes="0"/>
+                  <Component id="btnOrdenesCompra" alignment="1" pref="377" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -41,39 +41,39 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnConductores" min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="btnProveedores" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnOficiales" min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="btnArticulos" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnMultas" min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="btnOrdenesCompra" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnConductores">
+    <Component class="javax.swing.JButton" name="btnProveedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Conductores"/>
+        <Property name="text" type="java.lang.String" value="Proveedores"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConductoresActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProveedoresActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnOficiales">
+    <Component class="javax.swing.JButton" name="btnArticulos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Oficiales"/>
+        <Property name="text" type="java.lang.String" value="Articulos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOficialesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArticulosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnMultas">
+    <Component class="javax.swing.JButton" name="btnOrdenesCompra">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Multas"/>
+        <Property name="text" type="java.lang.String" value="Ordenes de compra"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMultasActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdenesCompraActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

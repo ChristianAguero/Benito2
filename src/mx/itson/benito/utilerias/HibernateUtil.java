@@ -26,7 +26,7 @@ public class HibernateUtil {
     static {
         try{
             Configuration configuration = new Configuration();
-            configuration.configure("hibernate.cfg.xml");
+            configuration.configure();
             factory = configuration.buildSessionFactory();
         }catch(HibernateException ex){
                 System.err.println("No se pudo crear la sesión de Hibernate debido al error: "+ex);
