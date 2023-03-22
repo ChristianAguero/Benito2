@@ -135,15 +135,16 @@ public class OrdenesMain extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        GuardarArticulo formulario = new GuardarArticulo(this, true, 0);
+        /*GuardarArticulo formulario = new GuardarArticulo(this, true, 0);
         formulario.setVisible(true);
 
-        cargarTabla();
+        cargarTabla();*/
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        try{
+        /*try{
 
             int renglon = tblArticulos.getSelectedRow();
             int id = Integer.parseInt( tblArticulos.getModel().getValueAt(renglon, 0).toString());
@@ -156,12 +157,13 @@ public class OrdenesMain extends javax.swing.JFrame {
 
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
-        }
+        }*/
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        try{
+        /*try{
 
             int renglon = tblArticulos.getSelectedRow();
             int id = Integer.parseInt( tblArticulos.getModel().getValueAt(renglon, 0).toString());
@@ -174,13 +176,16 @@ public class OrdenesMain extends javax.swing.JFrame {
 
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
-        }
+        }*/
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVerArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerArticulosActionPerformed
         
-        
+        int renglon = tblOrdenes.getSelectedRow();
+        int id = Integer.parseInt( tblOrdenes.getModel().getValueAt(renglon, 0).toString());
+
+        new ArticulosDeOrden(this, true, id).setVisible(true);
         
     }//GEN-LAST:event_btnVerArticulosActionPerformed
 

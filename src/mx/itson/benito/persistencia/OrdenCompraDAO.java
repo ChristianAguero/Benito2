@@ -6,6 +6,7 @@
 package mx.itson.benito.persistencia;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
@@ -47,7 +48,7 @@ public class OrdenCompraDAO {
     
     }
     
-    public boolean guardar(String nombre, String clave, String telefono, String contacto){
+    public boolean guardar(String cliente, String direccion, String telefono, Proveedor proveedor, String folio, float subtotal, Date fecha, List<Articulo> articulos){
         
         boolean resultado = false;
         
@@ -56,17 +57,27 @@ public class OrdenCompraDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Proveedor p = new Proveedor();
-            p.setNombre(nombre);
-            p.setClave(clave);
-            p.setTelefono(telefono);
-            p.setContacto(contacto);
+            OrdenCompra o = new OrdenCompra();
+            o.setCliente(cliente);
+            o.setDireccion(direccion);
+            o.setTelefono(telefono);
+            o.setProveedor(proveedor);
+            o.setFolio(folio);
+            o.setSubtotal(subtotal);
             
-            session.save(p);
+            float iva = (float) (subtotal * 0.16);
+            float total = subtotal + iva;
+            
+            o.setIva(iva);
+            o.setTotal(total);
+            o.setFecha(fecha);
+            o.setArticulos(articulos);
+            
+            session.save(o);
             
             session.getTransaction().commit();
             
-            resultado = p.getId() != 0;
+            resultado = o.getId() != 0;
             
         }catch(Exception ex){
             
@@ -97,7 +108,7 @@ public class OrdenCompraDAO {
         
     }
     
-    /*public boolean editar(int id, String nombre, String clave, String telefono, String contacto){
+    public boolean editar(int id, String cliente, String direccion, String telefono, Proveedor proveedor, String folio, float subtotal, Date fecha, List<Articulo> articulos){
         
         boolean resultado = false;
         
@@ -106,16 +117,26 @@ public class OrdenCompraDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            OrdenCompra orden = obtenerPorId(id);
+            OrdenCompra o = obtenerPorId(id);
             
             if(proveedor != null){
                 
-                proveedor.setNombre(nombre);
-                proveedor.setClave(clave);
-                proveedor.setTelefono(telefono);
-                proveedor.setContacto(contacto);
+                o.setCliente(cliente);
+                o.setDireccion(direccion);
+                o.setTelefono(telefono);
+                o.setProveedor(proveedor);
+                o.setFolio(folio);
+                o.setSubtotal(subtotal);
+
+                float iva = (float) (subtotal * 0.16);
+                float total = subtotal + iva;
+
+                o.setIva(iva);
+                o.setTotal(total);
+                o.setFecha(fecha);
+                o.setArticulos(articulos);
                 
-                session.saveOrUpdate(proveedor);
+                session.saveOrUpdate(o);
                 session.getTransaction().commit();
                 
                 resultado = true;
@@ -146,11 +167,11 @@ public class OrdenCompraDAO {
                Session session = HibernateUtil.getSessionFactory().openSession();
                session.beginTransaction();
 
-               Proveedor proveedor = obtenerPorId(id);
+               OrdenCompra orden= obtenerPorId(id);
 
-               if(proveedor != null){
+               if(orden != null){
 
-                   session.delete(proveedor);
+                   session.delete(orden);
                    session.getTransaction().commit();
 
                    resultado = true;
@@ -167,6 +188,6 @@ public class OrdenCompraDAO {
          
          return resultado;
         
-    }*/
+    }
     
 }
