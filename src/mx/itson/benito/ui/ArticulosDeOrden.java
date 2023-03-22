@@ -5,6 +5,7 @@
 package mx.itson.benito.ui;
 
 import java.util.List;
+import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.OrdenCompra;

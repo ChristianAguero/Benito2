@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import mx.itson.benito.entidades.*;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;

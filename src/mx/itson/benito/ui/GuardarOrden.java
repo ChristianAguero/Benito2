@@ -4,18 +4,65 @@
  */
 package mx.itson.benito.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import mx.itson.benito.entidades.*;
+import mx.itson.benito.persistencia.*;
+
 /**
  *
  * @author shiri
  */
 public class GuardarOrden extends javax.swing.JDialog {
 
+    int idOrden;
+    
     /**
      * Creates new form GuardarOrden
      */
-    public GuardarOrden(java.awt.Frame parent, boolean modal) {
+    public GuardarOrden(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        DateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
+        
+        idOrden = id;
+        
+        cboProveedores.removeAllItems();
+        cboDias.removeAllItems();
+        cboAnios.removeAllItems();
+        lstArticulos.removeAll();
+        
+        CambiarDias();
+        agregarProveedores();
+        cargarArticulos();
+        
+        if(idOrden != 0){
+            
+            OrdenCompraDAO ord = new OrdenCompraDAO();
+            OrdenCompra orden = ord.obtenerPorId(this.idOrden);
+            
+            txtCliente.setText(orden.getCliente());
+            txtDireccion.setText(orden.getDireccion());
+            
+            
+            Date fecha = orden.getFecha();
+            String fech = formato.format(fecha);
+            String f[] = fech.split("/");
+            
+            cboMeses.setSelectedItem(f[1]);
+            cboDias.setSelectedItem(f[0]);
+            cboAnios.setSelectedItem(f[2]);
+            
+        }
+        
     }
 
     /**
@@ -27,22 +74,380 @@ public class GuardarOrden extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtCliente = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cboProveedores = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtFolio = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtSubtotal = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cboMeses = new javax.swing.JComboBox<>();
+        cboDias = new javax.swing.JComboBox<>();
+        cboAnios = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstArticulos = new javax.swing.JList<>();
+        btnGuardar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("Cliente");
+
+        jLabel2.setText("Direccion");
+
+        jLabel3.setText("Telefono");
+
+        jLabel4.setText("Proveedor");
+
+        jLabel5.setText("Folio");
+
+        jLabel6.setText("Subtotal");
+
+        jLabel7.setText("Fecha");
+
+        cboMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        cboMeses.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboMesesItemStateChanged(evt);
+            }
+        });
+        cboMeses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMesesActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(lstArticulos);
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCliente)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDireccion)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(cboProveedores, 0, 782, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFolio)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSubtotal)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cboMeses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboDias, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnGuardar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboMesesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMesesItemStateChanged
+
+        cboDias.removeAllItems();
+        cboAnios.removeAllItems();
+        CambiarDias();
+        
+    }//GEN-LAST:event_cboMesesItemStateChanged
+
+    private void cboMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboMesesActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+        try{
+
+            String cliente = txtCliente.getText();
+            String direccion = txtDireccion.getText();
+            String telefono = txtTelefono.getText();
+            float subtotal = Float. parseFloat(txtSubtotal.getText());
+            Proveedor proveedor = (Proveedor)cboProveedores.getSelectedItem();
+            String folio = txtFolio.getText();
+            String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
+            ListModel<Articulo> arts = lstArticulos.getModel();
+
+            boolean funco = this.idOrden == 0 ?
+            new ArticuloDAO().guardar(cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos):
+            new ArticuloDAO().editar(idOrden, cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos);
+
+            if(funco){
+
+                JOptionPane.showMessageDialog(this, "El registro fue exitoso", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
+                dispose();
+
+            }else{
+
+                JOptionPane.showMessageDialog(this, "El registro tuvo un error", "No guardado", JOptionPane.ERROR_MESSAGE);
+
+                dispose();
+
+            }
+
+        }catch(Exception ex){
+
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public void cargarArticulos(){
+        
+        ArticuloDAO ar = new ArticuloDAO();
+            
+        List<Articulo> articulos = ar.ObtenerTodos();
+        final DefaultListModel model = new DefaultListModel();
+        
+        for(Articulo a : articulos){
+
+            model.addElement(a.toString());
+
+        }
+        
+        lstArticulos.setModel(model);
+        
+    }
+    
+    /**
+     * Sirve para agregar todos los proveedores existentes al combobox de proveedores
+     */
+    public void agregarProveedores(){
+        
+        ProveedorDAO pr = new ProveedorDAO();
+        List<Proveedor> proveedores = pr.ObtenerTodos();
+        
+        try{
+            
+            for(Proveedor p : proveedores){
+            
+                cboProveedores.addItem(p);
+            
+            }
+            
+        }catch(Exception ex){
+            
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+            
+        }
+        
+    }
+    
+    /**
+     * Sirve para llenar los combo box de los dias y los años
+     */
+    public void CambiarDias(){
+        
+         try{
+             
+             int dia = 1;
+             int i = 0;
+             int a = 1900;
+             
+             while(a <= 2100){
+                 
+                 cboAnios.addItem(Integer.toString(a));
+                 a++;
+                 
+             }
+            
+             if(cboMeses.getSelectedItem().toString().equals("January")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("February")){
+                 
+                 while(i < 29){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("March")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("April")){
+                 
+                 while(i < 30){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("May")){
+                 
+                 while(i < 31){
+                     
+                    cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("June")){
+                 
+                 while(i < 30){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("July")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("August")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("September")){
+                 
+                 while(i < 30){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("October")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("November")){
+                 
+                 while(i < 30){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }else if(cboMeses.getSelectedItem().toString().equals("December")){
+                 
+                 while(i < 31){
+                     
+                     cboDias.addItem(Integer.toString(dia));
+                     i++;
+                     dia++;
+                     
+                 }
+                 
+             }
+                
+            
+        }catch(Exception ex){
+            
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+            
+        }
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -73,7 +478,7 @@ public class GuardarOrden extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GuardarOrden dialog = new GuardarOrden(new javax.swing.JFrame(), true);
+                GuardarOrden dialog = new GuardarOrden(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -86,5 +491,24 @@ public class GuardarOrden extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cboAnios;
+    private javax.swing.JComboBox<String> cboDias;
+    private javax.swing.JComboBox<String> cboMeses;
+    private javax.swing.JComboBox<Proveedor> cboProveedores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Articulo> lstArticulos;
+    private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtFolio;
+    private javax.swing.JTextField txtSubtotal;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
