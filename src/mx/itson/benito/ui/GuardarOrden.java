@@ -6,6 +6,7 @@ package mx.itson.benito.ui;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -84,8 +85,6 @@ public class GuardarOrden extends javax.swing.JDialog {
         cboProveedores = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtFolio = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtSubtotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cboMeses = new javax.swing.JComboBox<>();
         cboDias = new javax.swing.JComboBox<>();
@@ -105,8 +104,6 @@ public class GuardarOrden extends javax.swing.JDialog {
         jLabel4.setText("Proveedor");
 
         jLabel5.setText("Folio");
-
-        jLabel6.setText("Subtotal");
 
         jLabel7.setText("Fecha");
 
@@ -138,7 +135,6 @@ public class GuardarOrden extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCliente)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -149,8 +145,6 @@ public class GuardarOrden extends javax.swing.JDialog {
                     .addComponent(cboProveedores, 0, 782, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFolio)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSubtotal)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cboMeses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,6 +152,9 @@ public class GuardarOrden extends javax.swing.JDialog {
                         .addComponent(cboDias, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnGuardar)))
@@ -187,10 +184,6 @@ public class GuardarOrden extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -201,7 +194,7 @@ public class GuardarOrden extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,21 +215,34 @@ public class GuardarOrden extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         try{
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
 
             String cliente = txtCliente.getText();
             String direccion = txtDireccion.getText();
             String telefono = txtTelefono.getText();
-            float subtotal = Float. parseFloat(txtSubtotal.getText());
             Proveedor proveedor = (Proveedor)cboProveedores.getSelectedItem();
             String folio = txtFolio.getText();
-            String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
+            String fech = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
+            Date fecha = formato.parse(fech);
             ListModel<Articulo> arts = lstArticulos.getModel();
-
+            
+            List<Articulo> articulos = new ArrayList<>();
+            float subtotal = 0;
+            
+            for(int i = 0; i <= arts.getSize() - 1; i++){
+                
+                Articulo a = arts.getElementAt(i);
+                subtotal += a.getPrecio();
+                articulos.add(a);
+                
+            }
+             
             boolean funco = this.idOrden == 0 ?
-            new ArticuloDAO().guardar(cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos):
-            new ArticuloDAO().editar(idOrden, cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos);
+            new OrdenCompraDAO().guardar(cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos):
+            new OrdenCompraDAO().editar(idOrden, cliente, direccion, telefono, proveedor, folio, subtotal, fecha, articulos);
 
-            if(funco){
+            if(funco){ 
 
                 JOptionPane.showMessageDialog(this, "El registro fue exitoso", "Guardado", JOptionPane.INFORMATION_MESSAGE);
 
@@ -267,7 +273,7 @@ public class GuardarOrden extends javax.swing.JDialog {
         
         for(Articulo a : articulos){
 
-            model.addElement(a.toString());
+            model.addElement(a);
 
         }
         
@@ -501,14 +507,12 @@ public class GuardarOrden extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Articulo> lstArticulos;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFolio;
-    private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
